@@ -1,0 +1,15 @@
+{
+  "name": "discord-crawller",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:5tarlight/discord-crawller.git",
+  "author": "5tarlight <developerstarlight@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "dotenv": "^9.0.2"
+  },
+  "scripts": {
+    "start": "node ."
+  }
+}
