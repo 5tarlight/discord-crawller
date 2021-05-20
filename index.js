@@ -6,6 +6,7 @@ const client = new Client()
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
+  client.user.setActivity('당신의 모든것 감시당하고 있다!')
 });
 
 client.on('message', msg => {
