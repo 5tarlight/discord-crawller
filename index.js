@@ -1,4 +1,4 @@
-const { Client } = require('discord.js')
+const { Client, MessageEmbed } = require('discord.js')
 require('dotenv').config()
 
 const client = new Client()
@@ -8,7 +8,7 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  if (msg.content.startsWith('y.') && msg.author.id != '352755226224361482') {
+  if (msg.content.startsWith('y.') && msg.author.id != '352755226224361482' && msg.author.id != '328392758798581761') {
     msg.reply('Permission Denied')
     return
   } else {
@@ -16,7 +16,15 @@ client.on('message', msg => {
   }
 
   if (msg.content === 'y.ping') {
-    msg.reply('Pong!');
+    msg.channel.send("Pinging...").then(m => {
+      var ping = m.createdTimestamp - msg.createdTimestamp;
+
+      var embed = new MessageEmbed()
+        .setAuthor(`Your ping is ${ping}`)
+        .setColor("Your Color")
+
+      m.edit(embed)
+    })
   }
 });
 
