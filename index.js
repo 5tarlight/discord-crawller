@@ -1,5 +1,6 @@
-const { Client, MessageEmbed } = require('discord.js')
 require('dotenv').config()
+const { Client, MessageEmbed } = require('discord.js')
+const { save } = require('./crawl')
 
 const client = new Client()
 
@@ -8,24 +9,26 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  if (msg.content.startsWith('y.') && msg.author.id != '352755226224361482' && msg.author.id != '328392758798581761') {
-    msg.reply('Permission Denied')
-    return
-  } else {
-    // On Command
+  if (msg.content.startsWith('y.')) { // On Command
+    const cmd = msg.content.slice('y.'.length)
+
+    if (cmd === 'ping' || cmd === '핑') {
+      msg.channel.send("Pinging...").then(m => {
+        var ping = m.createdTimestamp - msg.createdTimestamp;
+
+        var embed = new MessageEmbed()
+          .setAuthor(`Your ping is ${ping}`)
+          .setColor("Your Color")
+
+        m.edit(embed)
+      })
+    }
+  } else { // On Crawl
+    if (msg.channel.id == '843033412629823500') {
+      save(msg.content)
+    }
   }
 
-  if (msg.content === 'y.ping') {
-    msg.channel.send("Pinging...").then(m => {
-      var ping = m.createdTimestamp - msg.createdTimestamp;
-
-      var embed = new MessageEmbed()
-        .setAuthor(`Your ping is ${ping}`)
-        .setColor("Your Color")
-
-      m.edit(embed)
-    })
-  }
 });
 
 client.login(process.env.BOT_TOKEN);
